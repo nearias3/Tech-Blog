@@ -5,7 +5,7 @@ class Post extends Model {}
 
 Post.init(
   {
-    user_id: {
+    id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
@@ -25,6 +25,13 @@ Post.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "user",
+        key: "id",
+      }
+    }
   },
   {
     sequelize,

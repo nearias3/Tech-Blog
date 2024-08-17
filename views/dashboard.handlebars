@@ -1,0 +1,17 @@
+<h1>Your Dashboard</h1>
+
+<a href="/new-post">Create New Post</a>
+
+{{#if posts.length}}
+<div>
+    {{#each posts}}
+    <article>
+        <h2><a href="/edit-post/{{id}}">{{title}}</a></h2>
+        <p>{{date_created}}</p>
+        <p>{{content}}</p>
+    </article>
+    {{/each}}
+</div>
+{{else}}
+<p>You haven't written any posts yet!</p>
+{{/if}}

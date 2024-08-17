@@ -1,0 +1,15 @@
+<h1>Welcome to the Tech Blog!</h1>
+
+{{#if posts.length}}
+<div>
+    {{#each posts}}
+    <article>
+        <h2><a href="/post/{{id}}">{{title}}</a></h2>
+        <p>by {{user.username}} on {{date_created}}</p>
+        <p>{{content}}</p>
+    </article>
+    {{/each}}
+</div>
+{{else}}
+<p>No posts yet!</p>
+{{/if}}

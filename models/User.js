@@ -29,7 +29,7 @@ User.init(
   },
   {
     hooks: // ???
-  }
+  },
   {
     sequelize,
     timestamps: false,

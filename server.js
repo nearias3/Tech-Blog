@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-app.use(sessions({
+app.use(session({
     secret: process.env.SECRET_SESSION,
     cookie: {},
     resave: false,

@@ -5,10 +5,26 @@ class Post extends Model {}
 
 Post.init(
   {
-    user_id: {},
-    title: {},
-    content: {},
-    date_created: {},
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    date_created: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     sequelize,

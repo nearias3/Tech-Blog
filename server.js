@@ -8,20 +8,31 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Handlebars.js engine helpers
-const hbs = 
+const hbs = exphbs.create({});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// hanlebars.js template engine code
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
-// sessions code
+app.use(sessions({
+    secret: process.env.SECRET_SESSION,
+    cookie: {},
+    resave: false,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+      db: sequelize,
+    }),
+  })
+);
 
 app.use(express.static('public'));
 
 app.use(require('./controllers/'));
 
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log(`App is listening on port ${PORT}!`));
+    app.listen(PORT, () =>
+      console.log(`App is listening at http://localhost:${PORT}/!`)
+    );
 });

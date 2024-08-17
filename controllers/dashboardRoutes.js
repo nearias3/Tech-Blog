@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { Post } = require("../models");
+const Post = require("C:/Users/nicol/tech-blog/models/Post");
+const User = require("C:/Users/nicol/tech-blog/models/User");
 const withAuth = require("../utils/auth");
 
 // Get all posts for logged-in user

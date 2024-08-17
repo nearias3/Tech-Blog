@@ -22,13 +22,13 @@ Post.init(
       allowNull: false,
     },
     date_created: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DATE,
       allowNull: false,
     },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: "user",
+        model: "User",
         key: "id",
       },
     },

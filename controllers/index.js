@@ -5,6 +5,10 @@ const userRoutes = require("./userRoutes");
 
 router.use("/", homeRoutes);
 router.use("/dashboard", dashboardRoutes);
-router.use("/", userRoutes);
+router.use("/users", userRoutes);
+
+router.use((req, res) => {
+  res.status(404).send("Page not found!");
+});
 
 module.exports = router;

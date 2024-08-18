@@ -23,4 +23,26 @@ router.get("/", withAuth, async (req, res) => {
   }
 });
 
+// Render the create new post page
+router.get("/new-post", withAuth, (req, res) => {
+  res.render("new-post", {
+    logged_in: req.session.logged_in,
+  });
+});
+
+// Handle form submission for creating a new post
+router.post("/new-post", withAuth, async (req, res) => {
+  try {
+    const newPost = await Post.create({
+      title: req.body.title,
+      content: req.body.content,
+      user_id: req.session.user_id,
+    });
+
+    res.redirect("/dashboard");  // Redirect back to the dashboard after creating the post
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

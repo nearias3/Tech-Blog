@@ -15,10 +15,17 @@ router.post("/signup", async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-      res.status(200).json(userData);
+      res.redirect("/"); // Redirect to the homepage after successful signup
     });
   } catch (err) {
-    res.status(500).json(err);
+    if (err.name === "SequelizeUniqueConstraintError") {
+      // Redirect back to the signup page with an error message
+      res.status(400).render("signup", {
+        errorMessage: "Username already exists, please choose another one.",
+      });
+    } else {
+      res.status(500).json(err);
+    }
   }
 });
 
@@ -37,7 +44,9 @@ router.post("/login", async (req, res) => {
     if (!userData) {
       res
         .status(400)
-        .json({ message: "Incorrect username or password, please try again" });
+        .render("login", {
+          errorMessage: "Incorrect username or password, please try again.",
+        });
       return;
     }
 
@@ -46,7 +55,9 @@ router.post("/login", async (req, res) => {
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: "Incorrect username or password, please try again" });
+        .render("login", {
+          errorMessage: "Incorrect username or password, please try again.",
+        });
       return;
     }
 
@@ -54,9 +65,7 @@ router.post("/login", async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-      res
-        .status(200)
-        .json({ user: userData, message: "You are now logged in!" });
+      res.redirect("/dashboard"); // Redirect to the dashboard after successful login
     });
   } catch (err) {
     res.status(400).json(err);
@@ -64,10 +73,10 @@ router.post("/login", async (req, res) => {
 });
 
 // Logout
-router.post("/logout", (req, res) => {
+router.get("/logout", (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
-      res.status(204).end();
+      res.redirect("/"); 
     });
   } else {
     res.status(404).end();

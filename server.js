@@ -3,6 +3,7 @@ const session = require("express-session");
 const exphbs = require("express-handlebars");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const sequelize = require("./config/connection");
+const path = require("path");
 require("dotenv").config();
 require("./models");
 
@@ -28,12 +29,12 @@ app.use(session({
   })
 );
 
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(require('./controllers/'));
 
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () =>
-      console.log(`App is listening at http://localhost:${PORT}/!`)
+      console.log(`App is listening at http://localhost:${PORT}/`)
     );
 });

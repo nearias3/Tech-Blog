@@ -1,6 +1,11 @@
 const router = require("express").Router();
 const User = require("../models/User");
 
+// Render the sign-up page
+router.get("/signup", (req, res) => {
+  res.render("signup"); 
+});
+
 // Sign up
 router.post("/signup", async (req, res) => {
   try {
@@ -15,6 +20,11 @@ router.post("/signup", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+});
+
+// Render the login page
+router.get("/login", (req, res) => {
+  res.render("login"); 
 });
 
 // Login

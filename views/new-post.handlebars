@@ -1,0 +1,10 @@
+<h1>Create a New Post</h1>
+<form action="/dashboard/new-post" method="POST">
+    <label for="title">Title:</label>
+    <input type="text" name="title" id="title" required>
+    <label for="content">Content:</label>
+    <textarea name="content" id="content" required></textarea>
+    <label for="date_created">Date Created:</label>
+    <input type="datetime-local" name="date_created" id="date_created" required>
+    <button type="submit">Create Post</button>
+</form>

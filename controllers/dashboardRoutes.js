@@ -30,16 +30,18 @@ router.get("/new-post", withAuth, (req, res) => {
   });
 });
 
-// Handle form submission for creating a new post
+/// Handle form submission for creating a new post
 router.post("/new-post", withAuth, async (req, res) => {
   try {
     const newPost = await Post.create({
       title: req.body.title,
       content: req.body.content,
       user_id: req.session.user_id,
+      date_created: new Date(),
     });
 
-    res.redirect("/dashboard");  // Redirect back to the dashboard after creating the post
+    // Redirect back to the dashboard after creating the post
+    res.redirect("/dashboard");
   } catch (err) {
     res.status(500).json(err);
   }

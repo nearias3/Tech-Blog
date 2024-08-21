@@ -6,7 +6,7 @@
 {{#if post.comments.length}}
   <ul>
     {{#each post.comments}}
-      <li>{{this.user.username}}: {{this.content}} ({{this.date_created}})</li>
+      <li>{{this.user.username}}: {{this.content}}</li>
     {{/each}}
   </ul>
 {{else}}

@@ -41,6 +41,53 @@ router.get("/post/:id", async (req, res) => {
   }
 });
 
+// Render the edit form for a specific post
+router.get("/post/:id/edit", withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id);
+
+    if (!postData) {
+      res.status(404).json({ message: "No post found with this id!" });
+      return;
+    }
+
+    const post = postData.get({ plain: true });
+
+    res.render("edit-post", {
+      post,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// Handle the edit form submission
+router.put("/post/:id", withAuth, async (req, res) => {
+  try {
+    const updatedPost = await Post.update(
+      {
+        title: req.body.title,
+        content: req.body.content,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+
+    if (updatedPost[0] === 0) {
+      res.status(404).json({ message: "No post found with this id!" });
+      return;
+    }
+
+    res.redirect(`/post/${req.params.id}`);
+  } catch (err) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 
 // Create a new comment
 router.post("/post/:id/comment", withAuth, async (req, res) => {

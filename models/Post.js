@@ -3,6 +3,15 @@ const sequelize = require("../config/connection");
 
 class Post extends Model {}
 
+Post.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
+Post.hasMany(Comment, {
+  foreignKey: "post_id",
+  onDelete: "CASCADE",
+});
+
 Post.init(
   {
     id: {

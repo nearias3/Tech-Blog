@@ -88,6 +88,25 @@ router.post("/edit-post/:id", withAuth, async (req, res) => {
   }
 });
 
+// Route to handle the deletion of a post
+router.post("/delete-post/:id", withAuth, async (req, res) => {
+  try {
+    const postData = await Post.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    if (!postData) {
+      res.status(404).json({ message: "No post found with this id!" });
+      return;
+    }
+
+    res.redirect("/dashboard");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 module.exports = router;

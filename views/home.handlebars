@@ -1,6 +1,7 @@
 <h1>Welcome to the Tech Blog!</h1>
 
-{{#if posts.length}}
+{{#if logged_in}}
+    {{#if posts.length}}
 <div>
     {{#each posts}}
     <article>
@@ -12,4 +13,8 @@
 </div>
 {{else}}
 <p>No posts yet!</p>
+{{/if}}
+
+{{else}}
+  <p> <a href="/users/login">Log in</a> or <a href="/users/signup">sign up</a> to view posts!</p>
 {{/if}}

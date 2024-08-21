@@ -11,15 +11,6 @@ router.get("/post/:id", async (req, res) => {
           model: User,
           attributes: ["username"],
         },
-        {
-          model: Comment,
-          include: [
-            {
-                model: User,
-            attributes: ["username"],
-            }, 
-          ]
-        },
       ],
     });
 
@@ -47,7 +38,6 @@ router.post("/post/:id/comment", withAuth, async (req, res) => {
       content: req.body.content,
       post_id: req.params.id,
       user_id: req.session.user_id,
-      date_created: new Date(),
     });
 
     res.redirect(`/post/${req.params.id}`);

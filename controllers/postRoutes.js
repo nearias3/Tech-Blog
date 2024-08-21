@@ -45,20 +45,14 @@ router.get("/post/:id", async (req, res) => {
 // Create a new comment
 router.post("/post/:id/comment", withAuth, async (req, res) => {
   try {
-    console.log("Request body:", req.body); 
-    console.log("User ID:", req.session.user_id); 
-
     const newComment = await Comment.create({
       content: req.body.content,
       post_id: req.params.id,
       user_id: req.session.user_id,
     });
 
-    console.log("Comment created:", newComment); 
-
     res.redirect(`/post/${req.params.id}`);
   } catch (err) {
-    console.error("Error creating comment:", err); 
     res.status(500).json(err);
   }
 });

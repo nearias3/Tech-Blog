@@ -1,3 +1,6 @@
+const Sequelize = require("sequelize");
+require("dotenv").config();
+
 const sequelize = process.env.DATABASE_URL
   ? new Sequelize(process.env.DATABASE_URL, {
       dialect: "postgres",
@@ -16,7 +19,7 @@ const sequelize = process.env.DATABASE_URL
       {
         host: process.env.DB_HOST,
         dialect: "postgres",
-        port: process.env.DB_PORT,
+        port: process.env.DB_PORT || 5432,
       }
     );
 

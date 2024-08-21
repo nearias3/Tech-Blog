@@ -1,0 +1,23 @@
+<h1>{{post.title}}</h1>
+<p>by {{post.user.username}} on {{post.date_created}}</p>
+<p>{{post.content}}</p>
+
+<h2>Comments</h2>
+{{#if post.comments.length}}
+  <ul>
+    {{#each post.comments}}
+      <li>{{this.user.username}}: {{this.content}} ({{this.date_created}})</li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>No comments yet.</p>
+{{/if}}
+
+{{#if logged_in}}
+  <form action="/post/{{post.id}}/comment" method="POST">
+    <textarea name="content" id="content" required></textarea>
+    <button type="submit">Add Comment</button>
+  </form>
+{{else}}
+  <p><a href="/users/login">Login</a> to leave a comment.</p>
+{{/if}}

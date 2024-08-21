@@ -6,9 +6,12 @@
 <div>
     {{#each posts}}
     <article>
-        <h2><a href="/edit-post/{{id}}">{{title}}</a></h2>
-        <p>{{date_created}}</p>
-        <p>{{content}}</p>
+        <h2><a href="/post/{{this.id}}">{{this.title}}</a></h2>
+        <p>{{this.date_created}}</p>
+        <p>{{this.content}}</p>
+        <a href="/dashboard/edit-post/{{this.id}}">Edit</a>
+        <form action="/dashboard/delete-post/{{this.id}}" method="POST" style="display:inline;">
+        <button type="submit">Delete</button>
     </article>
     {{/each}}
 </div>

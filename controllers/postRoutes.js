@@ -11,6 +11,15 @@ router.get("/post/:id", async (req, res) => {
           model: User,
           attributes: ["username"],
         },
+        {
+          model: Comment,
+          include: [
+            {
+              model: User,
+              attributes: ["username"],
+            },
+        ],
+        },
       ],
     });
 
@@ -20,6 +29,8 @@ router.get("/post/:id", async (req, res) => {
     }
 
     const post = postData.get({ plain: true });
+
+    console.log("Post data with comments:", post); // Delete this later
 
     res.render("single-post", {
       post,

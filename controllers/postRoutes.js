@@ -30,7 +30,7 @@ router.get("/post/:id", async (req, res) => {
 
     const post = postData.get({ plain: true });
 
-    console.log("Post data with comments:", post); // Delete this later
+    console.log("Post data with comments:", post); 
 
     res.render("single-post", {
       post,
@@ -45,8 +45,8 @@ router.get("/post/:id", async (req, res) => {
 // Create a new comment
 router.post("/post/:id/comment", withAuth, async (req, res) => {
   try {
-    console.log("Request body:", req.body); // Delete this later
-    console.log("User ID:", req.session.user_id); // Delete this later
+    console.log("Request body:", req.body); 
+    console.log("User ID:", req.session.user_id); 
 
     const newComment = await Comment.create({
       content: req.body.content,
@@ -54,11 +54,11 @@ router.post("/post/:id/comment", withAuth, async (req, res) => {
       user_id: req.session.user_id,
     });
 
-    console.log("Comment created:", newComment); // Delete this later
+    console.log("Comment created:", newComment); 
 
     res.redirect(`/post/${req.params.id}`);
   } catch (err) {
-    console.error("Error creating comment:", err); // Delete this later
+    console.error("Error creating comment:", err); 
     res.status(500).json(err);
   }
 });

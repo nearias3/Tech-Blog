@@ -34,7 +34,7 @@ This repo is a full-stack web application that allows users to publish blogs, co
 
 3. Visit `http://localhost:3001` in your browser to access the application
 
-To view the deployed application, visit: [https://github.com/nearias3/Tech-Blog/tree/main]
+To view the deployed application, visit: [https://tech-blog-6wke.onrender.com]
 
 ![Screenshot of Home Page](/images/Screenshot1.png)
 ![Screenshot of Dashboard](/images/Screenshot2.png)
